@@ -26,6 +26,9 @@ class Converter
     numerals.each do |number| 
       if prior < adder.count(number) then
         amount = adder.count(number) - prior 
+      else if prior >= adder.count(number) then
+        amount = adder.count(number) + prior
+      end
       end
       prior = adder.count(number)
     end
