@@ -16,3 +16,19 @@ class Adder
     sum
   end
 end
+
+class Converter
+  def convert(input)
+    adder = Adder.new
+    numerals = input.upcase.scan /I|V|U|X|L|C|D|M/
+    amount = 0
+    prior = 0 
+    numerals.each do |number| 
+      if prior < adder.count(number) then
+        amount = adder.count(number) - prior 
+      end
+      prior = adder.count(number)
+    end
+    amount
+  end
+end
