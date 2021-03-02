@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/romanumerator'
+
+adder = Adder.new
+input = ARGV.inspect
+puts "Counting the numerals in #{input}"
+puts "#{adder.count(input)}"
