@@ -24,7 +24,7 @@ class Converter
     running_total = 0
     prior = 0 
 
-    numerals.each do |number| 
+    numerals.each_with_index do |number, index| 
       number = adder.count(number)
       case
       when prior == 0 then
@@ -36,8 +36,14 @@ class Converter
         running_total += (number - prior)
         prior = 0
       when prior > number then
-        running_total += (number + prior)
-        prior = number
+        if index < (numerals.length - 1) and
+           number < adder.count(numerals[index + 1]) then
+          running_total += prior
+          prior = number
+        else
+          running_total += (number + prior)
+          prior = number
+        end
       end
     end
 
