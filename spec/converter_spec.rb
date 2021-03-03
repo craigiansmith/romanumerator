@@ -37,4 +37,22 @@ RSpec.describe Converter, "#convert" do
       expect(converter.convert("MCM")).to eq(1900)
     end
   end
+  context "with MCML" do
+    it "converts to 1950" do
+      converter = Converter.new
+      expect(converter.convert("MCML")).to eq(1950)
+    end
+  end
+  context "with MCMLXXX" do
+    it "converts to 1980" do
+      converter = Converter.new
+      expect(converter.convert("MCMLXXX")).to eq(1980)
+    end
+  end
+  context "with MCMLXXV" do
+    it "converts to 1975" do
+      converter = Converter.new
+      expect(converter.convert("MCMLXXV")).to eq(1975)
+    end
+  end
 end

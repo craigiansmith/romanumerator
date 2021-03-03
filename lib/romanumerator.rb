@@ -22,31 +22,26 @@ class Converter
     adder = Adder.new
     numerals = input.upcase.scan /I|V|U|X|L|C|D|M/
     running_total = 0
-    prior = 0 
+    index = 0
 
-    numerals.each_with_index do |number, index| 
-      number = adder.count(number)
-      case
-      when prior == 0 then
-        prior += number
-      when prior == number then
-        running_total += number
-        prior += number
-      when prior < number then
-        running_total += (number - prior)
-        prior = 0
-      when prior > number then
-        if index < (numerals.length - 1) and
-           number < adder.count(numerals[index + 1]) then
-          running_total += prior
-          prior = number
+    while index < numerals.length do
+      s1 = adder.count(numerals[index])
+      if (index + 1) < numerals.length then
+        s2 = adder.count(numerals[index + 1])
+
+        if s1 >= s2 then
+          running_total += s1
+          index += 1
         else
-          running_total += (number + prior)
-          prior = number
+          running_total += s2 - s1
+          index += 2
         end
+      else
+        running_total += s1
+        index += 1
       end
     end
-
+    
     running_total
   end
 end
