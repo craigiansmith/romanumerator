@@ -21,17 +21,26 @@ class Converter
   def convert(input)
     adder = Adder.new
     numerals = input.upcase.scan /I|V|U|X|L|C|D|M/
-    amount = 0
+    running_total = 0
     prior = 0 
+
     numerals.each do |number| 
-      if prior < adder.count(number) then
-        amount = adder.count(number) - prior 
-      else if prior >= adder.count(number) then
-        amount = adder.count(number) + prior
+      number = adder.count(number)
+      case
+      when prior == 0 then
+        prior += number
+      when prior == number then
+        prior += number
+      when prior < number then
+        running_total += (number - prior)
+        prior = 0
+      when prior > number then
+        running_total += (number + prior)
+        prior = 0
       end
-      end
-      prior = adder.count(number)
+      prior = number
     end
-    amount
+
+    running_total
   end
 end
