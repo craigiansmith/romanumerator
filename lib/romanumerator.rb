@@ -30,15 +30,15 @@ class Converter
       when prior == 0 then
         prior += number
       when prior == number then
+        running_total += number
         prior += number
       when prior < number then
         running_total += (number - prior)
         prior = 0
       when prior > number then
         running_total += (number + prior)
-        prior = 0
+        prior = number
       end
-      prior = number
     end
 
     running_total

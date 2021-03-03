@@ -19,4 +19,10 @@ RSpec.describe Converter, "#convert" do
       expect(converter.convert("XI")).to eq(11)
     end
   end
+  context "with CXX" do
+    it "converts to 120" do
+      converter = Converter.new
+      expect(converter.convert("CXX")).to eq(120)
+    end
+  end
 end
