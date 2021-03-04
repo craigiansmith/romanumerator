@@ -19,4 +19,4 @@ scriptures seem to have it in for them too.
 
 or
 
-`romanumerator -c ROMAN\_NUMERALS\_TO\_CONVERT\_TO\_DECIMAL`
+`romanumerator -c ROMAN_NUMERALS_TO_CONVERT_TO_DECIMAL`
