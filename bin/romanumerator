@@ -1,8 +1,29 @@
 #!/usr/bin/env ruby
 
+require 'optparse'
+
 require_relative '../lib/romanumerator'
 
-adder = Adder.new
-input = ARGV.inspect
-puts "Counting the numerals in #{input}"
-puts "#{adder.count(input)}"
+options = {}
+
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage: romanumerator -c ROMAN_NUMERALS"
+  opts.on('-C', '--count INPUT', 'Count the values of the input') do |input|
+    options[:input] = input
+    puts "Counting the numerals in #{options[:input]}:"
+    adder = Adder.new
+    puts "#{adder.count(options[:input])}"
+  end
+  opts.on('-c', '--convert INPUT', 'Convert Roman Numerals to decimal') do |input|
+    options[:input] = input
+    puts "Converting #{options[:input]} to decimal:"
+    converter = Converter.new
+    puts "#{converter.convert(options[:input])}"
+  end
+  opts.on('-h', '--help', 'Display this screen') do
+    puts opts
+    exit
+  end
+end
+
+optparse.parse!
